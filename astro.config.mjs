@@ -1,14 +1,17 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
-import node from '@astrojs/node';
-import react from '@astrojs/react';
+import { defineConfig } from 'astro/config'
+import tailwind from '@astrojs/tailwind'
+import mdx from '@astrojs/mdx'
+import node from '@astrojs/node'
+import react from '@astrojs/react'
+import vercel from '@astrojs/vercel/serverless'
+import sitemap from '@astrojs/sitemap'
 
-import vercel from "@astrojs/vercel/serverless";
+import robotsTxt from 'astro-robots-txt'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), mdx(), react()],
+  site: 'https://astro-react-test-nine.vercel.app/',
+  integrations: [tailwind(), mdx(), react(), sitemap(), robotsTxt()],
   output: 'hybrid',
-  adapter: vercel()
-});
+  adapter: vercel(),
+})
