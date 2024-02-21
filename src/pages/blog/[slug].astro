@@ -30,7 +30,12 @@ if (!post) {
 const { Content } = await post.render()
 ---
 
-<Layout title={post.data.title}>
+<Layout
+  title={post.data.title}
+  openGraph={{
+    basic: { title: post.data.title, type: 'website', image: post.data.image.src },
+  }}
+>
   <section class="container">
     <div class="flex items-center justify-center gap-2">
       <h2 class="text-primary font-semibold">{post.data.author}</h2>
