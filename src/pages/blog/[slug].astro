@@ -1,0 +1,56 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { Image } from 'astro:assets'
+import { getCollection, type CollectionEntry } from 'astro:content'
+
+export const getStaticPaths = async () => {
+  const posts = await getCollection('posts')
+
+  const paths = posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+
+  return paths
+}
+
+type Props = {
+  post: CollectionEntry<'posts'>
+}
+const { post } = Astro.props
+
+// SSR
+// const { slug } = Astro.params
+// const post = await getEntryBySlug('posts', slug as string)
+
+if (!post) {
+  return Astro.redirect('/404')
+}
+
+const { Content } = await post.render()
+---
+
+<Layout title={post.data.title}>
+  <section class="container">
+    <div class="flex items-center justify-center gap-2">
+      <h2 class="text-primary font-semibold">{post.data.author}</h2>
+      <span>&bull;</span>
+      <p>{post.data.date}</p>
+    </div>
+    <h1 class="text-6xl font-bold text-center mt-2 text-secondary">
+      {post.data.title}
+    </h1>
+  </section>
+
+  <section class="container mt-4 px-8">
+    <Image
+      src={post.data.image}
+      alt={post.data.title}
+      class="w-full max-h-96 object-cover rounded-3xl"
+    />
+  </section>
+
+  <section class="container pb-10 mt-10 prose prose-2xl">
+    <Content />
+  </section>
+</Layout>

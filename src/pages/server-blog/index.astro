@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { PokemonList } from '@components/PokemonList'
+---
+
+<Layout title="Server posts">
+  <main class="container pb-10">
+    <h1 class="text-7xl font-bold mb-6">Server posts</h1>
+    <PokemonList client:only />
+  </main>
+</Layout>

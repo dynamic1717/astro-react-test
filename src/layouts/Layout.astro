@@ -1,0 +1,40 @@
+---
+import '@fontsource-variable/raleway'
+import 'src/base.css'
+import { ViewTransitions } from 'astro:transitions'
+import Header from './Header.astro'
+import { SEO, type Props as SeoProps } from 'astro-seo'
+
+interface Props {
+  title: string
+  openGraph?: SeoProps['openGraph']
+  meta?: { name: string; content: string }[]
+}
+
+const { title, openGraph, meta } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEO
+      title={title}
+      description="Astro project"
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.svg' }],
+        meta: [{ name: 'generator', content: Astro.generator }, ...(meta ?? [])],
+      }}
+      openGraph={openGraph}
+    />
+    <ViewTransitions />
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <style is:global>
+      /* Global styles might lay here or in a css file */
+      :root {
+      }
+    </style>
+  </body>
+</html>

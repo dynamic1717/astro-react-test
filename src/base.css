@@ -1,0 +1,19 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+.card-border {
+  @apply border-4 border-black rounded-3xl shadow-xl;
+}
+
+.soft-border {
+  border-radius: 3.125rem;
+  background: #f5f5f5;
+  box-shadow:
+    1.25rem 1.25rem 3.75rem #d0d0d0,
+    -1.25rem -1.25rem 3.75rem #ffffff;
+}

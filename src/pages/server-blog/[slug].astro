@@ -1,0 +1,39 @@
+---
+import Layout from '@layouts/Layout.astro'
+import { PokemonInfo } from '@components/PokemonInfo'
+import { serverUrl } from '@shared/api'
+
+// ! Mark this page as a SSR page so that we can use the `slug` param to fetch the data
+export const prerender = false
+const { slug } = Astro.params
+
+const response = await fetch(`${serverUrl}pokemon/${slug}`)
+if (!response.ok) {
+  return Astro.redirect('/404')
+}
+
+const data = await response.json()
+---
+
+<Layout
+  title={slug?.toUpperCase() || 'Pokemon'}
+  openGraph={{
+    basic: {
+      title: data.name,
+      image: data.sprites.other['official-artwork'].front_default,
+      type: 'website',
+    },
+  }}
+  meta={[
+    { name: 'twitter:title', content: data.name },
+    {
+      name: 'twitter:description',
+      content: `This is the page for ${data.name}`,
+    },
+    { name: 'twitter:image', content: data.sprites.front_default },
+  ]}
+>
+  <main class="container mt-10">
+    <PokemonInfo data={data} client:load />
+  </main>
+</Layout>

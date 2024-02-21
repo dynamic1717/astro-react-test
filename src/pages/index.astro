@@ -1,0 +1,33 @@
+---
+import Layout from '@layouts/Layout.astro'
+---
+
+<Layout title="Welcome to my Astro!">
+  <main class="container py-10">
+    <h1 class="text-4xl text-center">Welcome to <span class="font-bold">Astro</span></h1>
+
+    <section class="flex items-center justify-center gap-10 mt-16">
+      <a href="/blog">
+        <img
+          src="/images/file.jpg"
+          alt="Local files posts"
+          class="aspect-square h-56 soft-border p-10 mx-auto"
+        />
+        <p class="mt-4 text-center font-semibold text-primary">
+          Explore blog posts from local MDX files
+        </p>
+      </a>
+
+      <a href="/server-blog">
+        <img
+          src="/images/server.png"
+          alt="Server posts"
+          class="aspect-square h-56 soft-border p-10 mx-auto"
+        />
+        <p class="mt-4 text-center font-semibold text-primary">
+          Explore blog posts from server api
+        </p>
+      </a>
+    </section>
+  </main>
+</Layout>
